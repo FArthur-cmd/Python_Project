@@ -1,52 +1,34 @@
-import pygame
-from Battle.wait import wait
-
-def worker_after_wait_for_preparing(wait, click1, click2, mouse_x1, mouse_y1, mouse_x2, mouse_y2, units, window):
-    first_unit = 0
-    cell_x = 0
-    cell_y = 0
-    print(mouse_x2, mouse_y2)
+def worker_after_wait_for_preparing(click1, click2, mouse_x1, mouse_y1,
+                                    mouse_x2, mouse_y2, length=800, higth=600):
+    size_of_cell = (higth * 5 // 6) // 10
+    size = (length - size_of_cell * 12) // 2
     if click1 == 2 and click2 == 1:
-        if 50 >= mouse_y1 >= 0 and   150 >= mouse_x1 >= 0:
-            first_unit = 0
-        if 100 >= mouse_y1 > 50 and   150 >= mouse_x1 >= 0:
-            first_unit = 1
-        if 150 >= mouse_y1 > 100 and   150 >= mouse_x1 >= 0:
-            first_unit = 2
-        if 200 >= mouse_y1 > 150 and   150 >= mouse_x1 >= 0:
-            first_unit = 3
-        if 50 >= mouse_y1 >= 0 and   800 >= mouse_x1 >= 650:
-            first_unit = 4
-        if 100 >= mouse_y1 > 50 and   800 >= mouse_x1 >= 650:
-            first_unit = 5
-        if 150 >= mouse_y1 > 100 and 800 >= mouse_x1 >= 650:
-            first_unit = 6
-        cell_x = (mouse_x2 - 100) // 50
-        cell_y = (mouse_y2 - 2) // 50
-        return "stash " + str(first_unit) + " " + str(cell_y) + " " + str(cell_x)
-    if click1 == 1 and click2 == 2:
-        if 50 >= mouse_y2 >= 0 and   150 >= mouse_x2 >= 0:
-            first_unit = 0
-        if 100 >= mouse_y2 > 50 and   150 >= mouse_x2 >= 0:
-            first_unit = 1
-        if 150 >= mouse_y2 > 100 and   150 >= mouse_x2 >= 0:
-            first_unit = 2
-        if 200 >= mouse_y2 > 150 and   150 >= mouse_x2 >= 0:
-            first_unit = 3
-        if 50 >= mouse_y2 >= 0 and   800 >= mouse_x2 >= 650:
-            first_unit = 4
-        if 100 >= mouse_y2 > 50 and   800 >= mouse_x2 >= 650:
-            first_unit = 5
-        if 150 >= mouse_y2 > 100 and 800 >= mouse_x2 >= 650:
-            first_unit = 6
-        cell_x = (mouse_x1 - 50) // 12
-        cell_y = (mouse_y1 - 2) // 10
-        return "move " + str(cell_y) + " " + str(cell_x) + "stash"
-    if click1 == 2 and click2 == 2:
-        cell_x1 = (mouse_x1 - 50) // 12
-        cell_y1 = (mouse_y1 - 2) // 10
-        cell_x2 = (mouse_x2 - 50) // 12
-        cell_y2 = (mouse_y2 - 2) // 10
-        return "move " + str(cell_y1) + " " + str(cell_x1) + " " + str(cell_y2) + " " + str(cell_x2)
-    if click1 == 3 and click2 == 3:
-        return  "end"
+        first_unit = mouse_y1 // size_of_cell + (
+                    mouse_y1 % size_of_cell > 0) - 1 + \
+                     4 * (length >= mouse_x1 >= length - size)
+        cell_x = (mouse_x2 - size) // size_of_cell
+        cell_y = mouse_y2 // size_of_cell
+        return "stash " + str(first_unit) + " " + str(cell_y) + " " + str(
+            cell_x), ""
+    elif click1 == 1 and click2 == 2:
+        cell_x = (mouse_x1 - size) // size_of_cell
+        cell_y = mouse_y1 // size_of_cell
+        return "move " + str(cell_y) + " " + str(cell_x) + " stash", ""
+    elif click1 == 2 and click2 == 2:
+        return "Nothing happened", "Nothing happened"
+    elif click1 == 1 and click2 == 1:
+        cell_x1 = (mouse_x1 - size) // size_of_cell
+        cell_y1 = mouse_y1 // size_of_cell
+        cell_x2 = (mouse_x2 - size) // size_of_cell
+        cell_y2 = mouse_y2 // size_of_cell
+        return "move " + str(cell_y1) + " " + str(cell_x1) + " to " + str(
+            cell_y2) + " " + str(cell_x2), ""
+    elif click1 == 3 and click2 == 3:
+        return "end", ""
+    elif (higth >= mouse_y1 >= higth * 11 // 12
+        and length >= mouse_x1 >= length * 7 // 8) or (
+            higth >= mouse_y2 >= higth * 11 // 12
+            and length >= mouse_x2 >= length * 7 // 8):
+        return "EXIT", ""
+    elif click1 == 4:
+        return "EXIT", ""

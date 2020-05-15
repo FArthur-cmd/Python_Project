@@ -14,9 +14,7 @@ triple_attack_creatures = [
 
 attack_and_move_back = [
     "Blood Maiden",
-    "Blood Fury",
-    "Succubus",
-    "Succubus Mistress"
+    "Blood Fury"
 ]
 attack_without_return = [
     "Minotaur",
@@ -24,7 +22,6 @@ attack_without_return = [
     "Iron Golem",
     "Steel Golem",
     "Colossus",
-    "Titan",
     "Squire"
 ]
 damage_increasing_with_movement = [
@@ -40,8 +37,6 @@ damage_increasing_with_movement = [
 Killing_one_creature = [
     "Pit Fiend",
     "Pit Lord",
-    "Lich",
-    "Archlich",
     "Wight",
     "Wraith"
 ]
@@ -51,4 +46,19 @@ life_stealing = [
     "Vampire Lord",
     "Angel",
     "Archangel"
+]
+
+size_ = [
+    800,
+    1178,
+    1280,
+    1920,
+    1600
+]
+k_ = [
+    1,
+    1.25,
+    1.45,
+    2,
+    1.5
 ]
