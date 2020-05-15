@@ -1,13 +1,12 @@
 from Heroes.Hero_init import Hero
 
 
-class Priest(Hero):
+class DarkElf(Hero):
     def __init__(self):
-        super().__init__("Railag",  # name
-                         None,  # spells
-                         1,  # attack
-                         0,  # protection
-                         0,  # morale
-                         0,  # luck
-                         2,  # witchcraft
-                         2)  # knowledge
+        super().__init__(name="Railag",
+                         attack=1,
+                         protection=0,
+                         morale=0,
+                         luck=0,
+                         witchcraft=2,
+                         knowledge=2)
