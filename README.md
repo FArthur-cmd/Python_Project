@@ -7,3 +7,5 @@ on Linux:
     python3 <path to game.py>/Game.py
 on Windows:
     python3 <path to game.py>\Game.py
+
+Not last version. No interfece and no instruction
